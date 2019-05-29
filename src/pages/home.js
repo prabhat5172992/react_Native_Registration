@@ -3,18 +3,34 @@ import {
   Text,
   ScrollView,
   View,
+  Button,
   StyleSheet,
   DrawerLayoutAndroid,
   ToastAndroid,
   StatusBar,
   ImageBackground
 } from "react-native";
+import { formatData } from "../utils/service/index";
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allCountries: []
+    };
+  }
   static navigationOptions = {
     title: "Home"
   };
 
+  getAllCountries = async () => {
+    const data = await formatData();
+    console.log("My Data", data);
+    this.setState({ allCountries: data });
+    this.props.navigation.navigate("DetailsScreen", {
+      countries: data
+    });
+  };
   render() {
     ToastAndroid.show("Logged In!!", ToastAndroid.SHORT);
     var navigationView = (
@@ -27,7 +43,6 @@ export default class Home extends Component {
     return (
       <DrawerLayoutAndroid
         drawerWidth={200}
-        //drawerBackgroundColor="rgba(40, 175, 53, 0.63)"
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => navigationView}
       >
@@ -39,8 +54,14 @@ export default class Home extends Component {
             <StatusBar backgroundColor="#1c313a" barStyle="light-content" />
             <Text style={styles.text}>Hello Prabhat</Text>
             <Text style={styles.text}>Welcome to React Native World!</Text>
+            <View style={{ marginVertical: 10 }}>
+              <Button
+                onPress={this.getAllCountries}
+                title="Countries"
+                color="#841584"
+              />
+            </View>
           </ImageBackground>
-          {/* <BottomTab /> */}
         </View>
       </DrawerLayoutAndroid>
     );
@@ -49,7 +70,6 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: "#718792",
     flex: 1,
     alignItems: "center",
     justifyContent: "center"

@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar } from "react-native";
 import Login from "./src/pages/Login";
 import Signup from "./src/pages/Signup";
 import Home from "./src/pages/home";
+import Details from "./src/pages/Details";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 
 const RootStack = createStackNavigator(
@@ -15,6 +16,9 @@ const RootStack = createStackNavigator(
     },
     homeScreen: {
       screen: Home
+    },
+    DetailsScreen: {
+      screen: Details
     }
   },
   {
@@ -27,7 +31,6 @@ RootStack.navigationOptions = ({ navigation }) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible
   };

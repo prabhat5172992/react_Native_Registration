@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   TouchableOpacity
 } from "react-native";
@@ -38,7 +37,6 @@ export default class Form extends Component {
   };
 
   validateEntry = () => {
-    debugger;
     let signup = getData();
     if (
       this.props.type === "Login" &&
